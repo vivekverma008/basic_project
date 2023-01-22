@@ -11,19 +11,7 @@ module.exports.signUp = (req,res)=>{
     res.render('sign-up');
 }
 module.exports.signIn = (req,res)=>{
-    let userid = req.cookies.user_id
-    User.findById(userid,function(err,user){
-        if(err){
-            console.log('error signing in ');
-            return res.redirect('back');
-        }
-        if(user){
-            console.log('already signed in ');
-            return res.redirect('profile');
-        }else{
-            res.render('sign-in');
-        }
-    })
+  res.render('signin');
     
 }
 
@@ -70,7 +58,6 @@ module.exports.createSession = function(req,res){
         }
         //create the session
     
-        res.cookie('user_id' , user.id);
-        return res.redirect('/users/profile');
+       
     })
 }
