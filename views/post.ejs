@@ -1,0 +1,28 @@
+<center>
+    <form action="/users/posts/createPost" method="post" >
+        <p>Enter your posts here :</p>
+        <input type="text" name="content"  placeholder="Type Here...">
+        <div>
+            <br>
+            <input type="submit" value="Submit">
+        </div>
+        
+    </form>
+
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>All your Posts are here </p>
+        <ul>
+            <% for(let x of allPosts){ %>
+                <li>
+                    <%=x.content %>
+                </li>
+            <% } %>
+            
+        </ul>
+    </div>
+</center>
