@@ -1,4 +1,3 @@
-const { find } = require('../models/user');
 const User = require('../models/user');
 
 module.exports.profile = function(req,res){
@@ -8,11 +7,24 @@ module.exports.posts = (req,res)=>{
     res.send('<h2>Users Post</h2>');
 }
 module.exports.signUp = (req,res)=>{
-    res.render('sign-up');
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    else{
+        console.log(req.isAuthenticated());
+        return res.render('sign-up');
+    }
+   
 }
 module.exports.signIn = (req,res)=>{
-  res.render('signin');
-    
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    else{
+        console.log(req.isAuthenticated());
+        return res.render('sign-in');
+    }
+     
 }
 
 module.exports.createUser = function(req,res){
@@ -43,21 +55,5 @@ module.exports.createUser = function(req,res){
     })
 }
 module.exports.createSession = function(req,res){
-    console.log('creatin Session');
-    User.findOne({email : req.body.email},function(err, user){
-        if(err){
-            return console.log('error in creatin session');
-        }
-        if(!user){
-            console.log('user not found')
-            return res.redirect('back');
-        }
-        if(user.password != req.body.password){
-            console.log('wrong password');
-            return res.redirect('back');
-        }
-        //create the session
-    
-       
-    })
+    res.redirect('profile');
 }
